@@ -1,0 +1,15 @@
+{
+    "props": {
+        "ascent": 800,
+        "descent": 200,
+        "em": 1000,
+        "family": "Sakamata Chloe Font"
+    },
+    "input": "svg",
+    "output": [
+        "sakamata-v1.ttf"
+    ],
+    "glyphs": {
+        /*GLYPHS*/
+    }
+}
