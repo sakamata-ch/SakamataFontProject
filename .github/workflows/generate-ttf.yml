@@ -1,0 +1,39 @@
+name: TTF Builder
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install requirements
+        run: build/_install_reqs_ubuntu.sh
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore chart-generator/chart-generator.csproj
+
+      - name: Run file copy tool
+        run: |
+          cd build
+          dotnet run
+
+      - name: Run svgs2ttf
+        run: |
+          cd build
+          svgs2ttf/svg2ttf metadata.json
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sakamata-font
+          path: build/*.ttf
