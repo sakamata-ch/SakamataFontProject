@@ -39,12 +39,12 @@
             for (let i = 0; i < text.length; i++) {
                 const c = text[i];
                 const img = document.createElement('img');
-                img.src = '../raw/' + chart[c];
+                img.src = 'https://cdn.jsdelivr.net/gh/mkaraki/SakamataFontProject@master/raw/' + chart[c];
                 fc.appendChild(img);
             }
         }
 
-        fetch('../chart-generator/output/file.tsv')
+        fetch('file.tsv')
             .then(resp => resp.text())
             .then(data => {
                 data.split('\n').forEach(l => {
