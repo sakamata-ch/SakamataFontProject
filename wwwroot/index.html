@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沙花叉フォントプロジェクト</title>
+    <style>
+        #font-container img {
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="orig-text">出力したい文章</label>
+        <input type="text" id="orig-text">
+    </div>
+    <div>
+        <button onclick="gen();">変換</button>
+    </div>
+
+    <br /><br />
+
+    <div id="font-container"></div>
+
+    <script>
+        let chart = [];
+
+        function gen() {
+            const fc = document.getElementById('font-container');
+
+            fc.innerHTML = '';
+
+            const text = document.getElementById('orig-text').value;
+
+            for (let i = 0; i < text.length; i++) {
+                const c = text[i];
+                const img = document.createElement('img');
+                img.src = '../raw/' + chart[c];
+                fc.appendChild(img);
+            }
+        }
+
+        fetch('../chart-generator/output/file.tsv')
+            .then(resp => resp.text())
+            .then(data => {
+                data.split('\n').forEach(l => {
+                    if (l === '') return;
+                    const v = l.split('\t')
+                    chart[v[0]] = v[1].replaceAll('\\', '/')
+                })
+            });
+    </script>
+</body>
+
+</html>
