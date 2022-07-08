@@ -1,0 +1,37 @@
+name: Webwriter
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore chart-generator/chart-generator.csproj
+      
+    - name: Run chart-generator
+      run: |
+        cd chart-generator
+        dotnet run
+        
+    - name: Copy data
+      run: |
+        cp chart-generator/output/*.tsv wwwroot/
+    
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/master' }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./wwwroot
