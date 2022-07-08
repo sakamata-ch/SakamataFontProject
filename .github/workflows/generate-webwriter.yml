@@ -23,6 +23,7 @@ jobs:
     - name: Run chart-generator
       run: |
         cd chart-generator
+        mkdir output
         dotnet run
         
     - name: Copy data
