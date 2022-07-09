@@ -42,7 +42,16 @@
 
             fc.innerHTML = '';
 
-            const text = document.getElementById('orig-text').value;
+            const text = document.getElementById('orig-text').value
+                .replaceAll('\\', '＼')
+                .replaceAll('/', '／')
+                .replaceAll(':', '：')
+                .replaceAll('*', '＊')
+                .replaceAll('?', '？')
+                .replaceAll('"', '”')
+                .replaceAll('|', '｜')
+                .replaceAll('<', '＜')
+                .replaceAll('>', '＞');
 
             for (let i = 0; i < text.length; i++) {
                 const c = text[i];
