@@ -5,8 +5,8 @@
 これは沙花叉クロヱ氏の手書き文字をフォント化することを目的とする非公式プロジェクトです。
 
 ## 使い方
-[Web Writer](https://mkarakiapps.com/SakamataFontProject/)上で書くか、
-ttfファイルを[Release](https://github.com/mkaraki/SakamataFontProject/releases)からダウンロードし、
+[Web Writer](https://font.sakamata.ch/)上で書くか、
+ttfファイルを[Release](https://github.com/sakamata-ch/SakamataFontProject/releases)からダウンロードし、
 お使いのOSなどにインストールすることでご利用いただけます。
 
 ## 協力したい
