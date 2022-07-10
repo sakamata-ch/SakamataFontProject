@@ -32,7 +32,7 @@ GitのサブモジュールについてはそれぞれのGitリポジトリ内�
 
 ## それ以外のデータ
 
-[MIT License](https://opensource.org/licenses/mit-license.php)
+ビルド用のメタデータ生成ツールやWebページなどの上記に無いデータは一部を除き[MIT License](https://opensource.org/licenses/mit-license.php)で提供されます。
 
 ```
 Copyright 2022 mkaraki
