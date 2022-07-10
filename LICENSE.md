@@ -22,6 +22,14 @@ GitのサブモジュールについてはそれぞれのGitリポジトリ内�
 
 リポジトリ内の`LICENSE`に従い、`GNU General Public License v3.0`でライセンスされています。
 
+## `ttf`などのフォントに関連する成果物
+
+フォント関連の成果物は[hololive productionの二次創作ガイドライン](https://www.hololive.tv/terms)に準拠する形で公開されます。
+
+これは、成果物が当該ガイドラインのもとで公開されているデータを元に作られているためです。
+
+これらのデータについての権利をリポジトリオーナー、コントリビューターは保有しておりません。
+
 ## それ以外のデータ
 
 [MIT License](https://opensource.org/licenses/mit-license.php)
