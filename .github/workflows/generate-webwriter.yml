@@ -66,6 +66,7 @@ jobs:
         run: |
           cp chart-generator/output/char.tsv wwwroot/static/
           cp build/sakamata-v1.woff2 wwwroot/static/sakamata.woff2
+          mkdir wwwroot/src/images
           cp build/svg/あ.svg wwwroot/src/images/icon.svg
 
       - name: Build Site
