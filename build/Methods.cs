@@ -13,4 +13,12 @@ internal static class Methods
 
         db.Add(new_c, db[ref_c]);
     }
+
+    public static string DestConv(char o) => DestConv(o.ToString());
+
+    public static string DestConv(string o)
+    {
+        return o.ToString()
+            .Replace(" ", "SPACE");
+    }
 }

@@ -2,37 +2,79 @@ name: Webwriter
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore chart-generator/chart-generator.csproj
-      
-    - name: Run chart-generator
-      run: |
-        cd chart-generator
-        mkdir output
-        dotnet run
-        
-    - name: Copy data
-      run: |
-        cp chart-generator/output/*.tsv wwwroot/
-    
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.ref == 'refs/heads/master' }}
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./wwwroot
+      - uses: actions/checkout@v3
+
+      # DEPEND
+
+      - name: Install requirements
+        run: build/_install_reqs_ubuntu.sh
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install woff2
+        run: sudo apt-get install -y woff2
+
+      - name: Restore dependencies
+        run: dotnet restore chart-generator/chart-generator.csproj
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: "16.x"
+
+      # TTF/WOFF2 BUILD
+
+      - name: Run file copy tool
+        run: |
+          cd build
+          dotnet run
+
+      - name: Run svgs2ttf
+        run: |
+          cd build
+          svgs2ttf/svgs2ttf metadata.json
+
+      - name: Compress to woff2
+        run: woff2_compress build/sakamata-v1.ttf
+
+      # CHART GEN
+
+      - name: Restore dependencies
+        run: dotnet restore chart-generator/chart-generator.csproj
+
+      - name: Run chart-generator
+        run: |
+          cd chart-generator
+          mkdir output
+          dotnet run
+
+      # SITE GEN
+
+      - name: Copy data
+        run: |
+          cp chart-generator/output/char.tsv wwwroot/static/
+          cp build/sakamata-v1.woff2 wwwroot/static/sakamata.woff2
+          cp build/svg/あ.svg wwwroot/src/images/icon.svg
+
+      - name: Build Site
+        run: |
+          cd wwwroot/
+          npm install
+          npm build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./wwwroot/public

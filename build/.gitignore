@@ -403,7 +403,7 @@ FodyWeavers.xsd
 !/output/.gitkeep
 !/resize/.gitkeep
 !/svg/.gitkeep
+!/svg/_EMPTY.svg
 
-metadata.json
-
-*.ttf
+/metadata.json
+/sakamata-*

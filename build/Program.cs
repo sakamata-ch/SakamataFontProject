@@ -1,6 +1,8 @@
 ﻿var files = System.IO.Directory.GetFiles("../raw", "?.png", SearchOption.AllDirectories);
 
-var images = new Dictionary<char, List<string>>();
+var images = new Dictionary<char, List<string>>() {
+    {' ', new List<string>() {"../raw/_SYS/SPACE.png"}},
+};
 
 var reuse_chars = new (char, char)[] {
     ('＼', '\\'),
@@ -26,7 +28,8 @@ foreach (var i in files)
 Console.WriteLine("Converting to Bitmap");
 foreach (var i in images)
 {
-    var psi = new System.Diagnostics.ProcessStartInfo("./convert2bmp.sh", $"\"{i.Value[0]}\" {i.Key}");
+    string dest = Methods.DestConv(i.Key);
+    var psi = new System.Diagnostics.ProcessStartInfo("./convert2bmp.sh", $"\"{i.Value[0]}\" \"{dest}\"");
     var p = System.Diagnostics.Process.Start(psi);
     p.WaitForExit();
 }
@@ -38,7 +41,10 @@ Console.WriteLine("Converting to SVG");
     p.WaitForExit();
 }
 
-Dictionary<char, string> useImages = images.ToDictionary(v=> v.Key, v => $"{v.Key}");
+Dictionary<char, string> useImages = images.ToDictionary(v => v.Key, v => Methods.DestConv(v.Key));
+
+useImages.Add('\r', "_EMPTY");
+useImages.Add('\n', "_EMPTY");
 
 foreach (var reuse_char in reuse_chars)
 {

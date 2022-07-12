@@ -21,6 +21,9 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
+      - name: Install woff2
+        run: sudo apt-get install -y woff2
+
       - name: Restore dependencies
         run: dotnet restore chart-generator/chart-generator.csproj
 
@@ -34,8 +37,11 @@ jobs:
           cd build
           svgs2ttf/svgs2ttf metadata.json
 
+      - name: Compress to woff2
+        run: woff2_compress build/sakamata-v1.ttf
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: sakamata-font
-          path: build/*.ttf
+          path: build/sakamata-*
