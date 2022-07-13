@@ -5,15 +5,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, Trans, useTranslation, useI18next } from 'gatsby-plugin-react-i18next';
 import '../styles/vanilla.scss';
 import '../styles/sakamata-font.scss';
+import '../styles/sakamata-font-preview.scss';
 import { graphql } from 'gatsby'
 
 export default function Home() {
   const { t } = useTranslation();
   const { languages, changeLanguage } = useI18next();
 
-  const [textInput, setTextInput] = useState<string>();
-
-
+  const [textInput, setTextInput] = useState<string>(t('Sakamata Chloe'));
 
   return (
     <div>
@@ -38,8 +37,8 @@ export default function Home() {
             <p>
               <Trans>Try font now to check out Sakamata's cute hand write charactors.</Trans>
             </p>
-            <input type="text" onChange={event => setTextInput(event.target.value)} />
-            <div className="font-sakamata" style={{ fontSize: '35pt', lineHeight: "60px" }}>
+            <input type="text" onChange={event => setTextInput(event.target.value)} defaultValue={textInput} />
+            <div className="font-sakamata">
               {textInput}
             </div>
           </Col>
