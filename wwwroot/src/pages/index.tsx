@@ -39,7 +39,7 @@ export default function Home() {
               <Trans>Try font now to check out Sakamata's cute hand write charactors.</Trans>
             </p>
             <input type="text" onChange={event => setTextInput(event.target.value)} />
-            <div className="font-sakamata" style={{ fontSize: '35pt' }}>
+            <div className="font-sakamata" style={{ fontSize: '35pt', lineHeight: "60px" }}>
               {textInput}
             </div>
           </Col>
