@@ -17,20 +17,25 @@
   },
   "dependencies": {
     "@canonical/react-components": "^0.37.3",
+    "babel-eslint": "^10.0.0",
+    "eslint": ">= 4.12.1",
     "gatsby": "^4.18.0",
     "gatsby-plugin-google-analytics": "^4.18.0",
     "gatsby-plugin-manifest": "^4.18.0",
+    "gatsby-plugin-pnpm": "^1.2.10",
     "gatsby-plugin-react-i18next": "^2.0.1",
     "gatsby-plugin-sass": "^5.18.0",
     "gatsby-plugin-sitemap": "^5.18.0",
     "gatsby-source-filesystem": "^4.18.0",
+    "graphql": ">=14.2.0 <15.0.0 || >=15.0.0 <16.0.0 || >=16.0.0 <17.0.0",
     "i18next": "^21.8.13",
     "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-i18next": "^11.18.0",
     "sass": "^1.53.0",
-    "vanilla-framework": "^3.6.1"
+    "vanilla-framework": "^3.6.1",
+    "webpack": "^4.36.0 || ^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",

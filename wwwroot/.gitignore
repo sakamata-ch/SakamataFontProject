@@ -5,3 +5,5 @@ src/gatsby-types.d.ts
 
 /src/images/icon.svg
 /static/*.woff2
+
+*.log
