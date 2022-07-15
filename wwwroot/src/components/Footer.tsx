@@ -13,7 +13,7 @@ export default function Footer(): JSX.Element {
       <Strip type="light" className="u-no-margin--top">
         <p><Trans>This project working under Hololive Derivative Works Guidelines.</Trans></p>
         <p>
-          <Link to="https://github.com/sakamata-ch/SakamataFontProject"><Icon name={ICONS.github}></Icon></Link>
+          <a href="https://github.com/sakamata-ch/SakamataFontProject" title="GitHub"><Icon name={ICONS.github}></Icon></a>
         </p>
       </Strip>
     </footer>
