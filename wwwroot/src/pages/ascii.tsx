@@ -84,7 +84,7 @@ export default function Home() {
 
 
       <Strip type="light" bordered>
-        <h2><Trans>Special Charactors</Trans></h2>
+        <h2><Trans>Special Characters</Trans></h2>
 
         <SupportTable table={data[2][0]} chars={chars} />
       </Strip>

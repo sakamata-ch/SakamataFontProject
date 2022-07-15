@@ -11,15 +11,19 @@ export default function Nav(): JSX.Element {
       <Navigation
         items={[
           {
-            label: t('Supported Charactors'),
+            label: t('Supported Characters'),
             items: [
               {
-                label: t('Alphabet, Number, ASCII Charactor'),
+                label: t('Alphabet, Number, ASCII Character'),
                 url: '/ascii'
               },
               {
                 label: t('Hiragana, Katakana'),
                 url: '/hiragana-katakana'
+              },
+              {
+                label: t('All Characters'),
+                url: '/all-chars'
               }
             ]
           },

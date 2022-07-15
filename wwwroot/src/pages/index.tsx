@@ -24,7 +24,7 @@ export default function Home() {
         <div className="row u-vertically-center">
           <div className="col-8">
             <h1><Trans>Sakamata Font Project</Trans></h1>
-            <p><Trans>Sakamata Font Project makes easy to use Sakamata Chloe's cute hand write charactors on yout computer.</Trans></p>
+            <p><Trans>Sakamata Font Project makes easy to use Sakamata Chloe's cute hand write Characters on yout computer.</Trans></p>
             <p><Trans>In personal purpose, you can use anywhere that accept custom ttf.</Trans></p>
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function Home() {
           <Col size={12}>
             <h2><Trans>Try it</Trans></h2>
             <p>
-              <Trans>Try font now to check out Sakamata's cute hand write charactors.</Trans>
+              <Trans>Try font now to check out Sakamata's cute hand write Characters.</Trans>
             </p>
             <input type="text" onChange={event => setTextInput(event.target.value)} defaultValue={textInput} />
             <div className="font-sakamata">
