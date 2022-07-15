@@ -7,16 +7,28 @@ import '../styles/vanilla.scss';
 import '../styles/sakamata-font.scss';
 import '../styles/sakamata-font-preview.scss';
 import { graphql } from 'gatsby'
+import Helmet from 'react-helmet';
 
 export default function Home() {
   const { t } = useTranslation();
-  const { languages, changeLanguage } = useI18next();
+  const { language, siteUrl } = useI18next();
 
   const [textInput, setTextInput] = useState<string>(t('Sakamata Chloe'));
 
   return (
     <div>
-      <title><Trans>Sakamata Font Project</Trans></title>
+      <Helmet title={t('Sakamata Font Project')}>
+        <html lang={language}></html>
+        <meta property="twitter:title" content={t('Sakamata Font Project')} />
+        <meta property="og:title" content={t('Sakamata Font Project')} />
+        <meta property='twitter:description' content={t("Sakamata Font Project makes easy to use Sakamata Chloe's cute hand write Characters on yout computer.")} />
+        <meta name="description" content={t("Sakamata Font Project makes easy to use Sakamata Chloe's cute hand write Characters on yout computer.")} />
+        <meta property="og:image" content="/favicon.svg" />
+        <meta property="twitter:image" content="/favicon.svg" />
+        <meta name="twitter:card" content="summary" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={t('Sakamata Font Project')} />
+      </Helmet>
 
       <Nav />
 

@@ -3,7 +3,8 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Sakamata Font Project`,
-    siteUrl: `https://font.sakamata.ch`
+    siteUrl: `https://font.sakamata.ch`,
+    image: '/favicon.svg',
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -14,7 +15,7 @@ const config: GatsbyConfig = {
     options: {
       "trackingId": ""
     }
-  }, */ "gatsby-plugin-sitemap", "gatsby-plugin-sass", 'gatsby-plugin-pnpm', {
+  }, */ "gatsby-plugin-sitemap", "gatsby-plugin-sass", 'gatsby-plugin-pnpm', `gatsby-plugin-react-helmet`, {
       resolve: 'gatsby-plugin-manifest',
       options: {
         "icon": "src/images/icon.svg"

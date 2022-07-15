@@ -20,6 +20,7 @@ specifiers:
   gatsby-plugin-google-analytics: ^4.18.0
   gatsby-plugin-manifest: ^4.18.0
   gatsby-plugin-pnpm: ^1.2.10
+  gatsby-plugin-react-helmet: ^5.18.0
   gatsby-plugin-react-i18next: ^2.0.1
   gatsby-plugin-sass: ^5.18.0
   gatsby-plugin-sitemap: ^5.18.0
@@ -29,6 +30,7 @@ specifiers:
   node-sass: ^7.0.1
   react: ^18.1.0
   react-dom: ^18.1.0
+  react-helmet: ^6.1.0
   react-i18next: ^11.18.0
   sass: ^1.53.0
   typescript: ^4.7.4
@@ -43,6 +45,7 @@ dependencies:
   gatsby-plugin-google-analytics: 4.18.0_kr7cifb2ttzyw5knebcjfaft7m
   gatsby-plugin-manifest: 4.18.1_la4kpiqkhs6cncgaiotzrvjxhu
   gatsby-plugin-pnpm: 1.2.10_gatsby@4.18.1
+  gatsby-plugin-react-helmet: 5.18.0_xpw3fq5c7t5l65vzult4y6cy2q
   gatsby-plugin-react-i18next: 2.0.1_mbynkvj56ht5llptbgqf6mbn5a
   gatsby-plugin-sass: 5.18.1_sd6bmdx32ddfmdwmtotpds4e7y
   gatsby-plugin-sitemap: 5.18.1_kr7cifb2ttzyw5knebcjfaft7m
@@ -52,6 +55,7 @@ dependencies:
   node-sass: 7.0.1
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  react-helmet: 6.1.0_react@18.1.0
   react-i18next: 11.18.0_yd26upqocxnjzqfcu5jth6cw3m
   sass: 1.53.0
   vanilla-framework: 3.6.1
@@ -6641,6 +6645,18 @@ packages:
       lodash.uniq: 4.5.0
     dev: false
 
+  /gatsby-plugin-react-helmet/5.18.0_xpw3fq5c7t5l65vzult4y6cy2q:
+    resolution: {integrity: sha512-H55KLoKZ/LeWWILYmkbt+L1c6E2ViurN16GyGOOzIg2LGjd7OXu9zy9H9lMKrkNpn/HUXhyUilYHqVeo5fve1A==}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      gatsby: ^4.0.0-next
+      react-helmet: ^5.1.3 || ^6.0.0
+    dependencies:
+      '@babel/runtime': 7.18.6
+      gatsby: 4.18.1_oa6dif4pse4a34ak2rds5slply
+      react-helmet: 6.1.0_react@18.1.0
+    dev: false
+
   /gatsby-plugin-react-i18next/2.0.1_mbynkvj56ht5llptbgqf6mbn5a:
     resolution: {integrity: sha512-XpEkbx/ndFNU+UVol+eLQ2cgqsQplpHYqzl2rig2OWIVpxGedLKUA50wTkuI1/LbDpQ43pDnr6r0q1Vt7/cMzQ==}
     peerDependencies:
@@ -10447,7 +10463,6 @@ packages:
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
     dev: false
-    optional: true
 
   /react-helmet/6.1.0_react@18.1.0:
     resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
@@ -10461,7 +10476,6 @@ packages:
       react-fast-compare: 3.2.0
       react-side-effect: 2.1.2_react@18.1.0
     dev: false
-    optional: true
 
   /react-i18next/11.18.0_yd26upqocxnjzqfcu5jth6cw3m:
     resolution: {integrity: sha512-coJujU20xJ5Wa5rHjTyB5LFKZb1yfXo2A+40RRSyAF0FlZRHyy+3C1Mr92x1JPfS7W7v2TWNn8mRhpDFGJwXVg==}
@@ -10507,7 +10521,6 @@ packages:
     dependencies:
       react: 18.1.0
     dev: false
-    optional: true
 
   /react-table/7.8.0_react@18.1.0:
     resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
