@@ -35,6 +35,7 @@ export default function Home() {
         <div className="row u-vertically-center">
           <div className="col-8">
             <h1><Trans>Supported Characters</Trans></h1>
+            <p>{chars.length} <Trans>characters supported now.</Trans></p>
           </div>
         </div>
       </section>
