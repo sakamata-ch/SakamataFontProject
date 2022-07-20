@@ -34,25 +34,18 @@ const config: GatsbyConfig = {
         localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
         languages: [`ja`, `en`],
         defaultLanguage: `ja`,
+        fallbackLanguage: 'en',
         // if you are using Helmet, you must include siteUrl, and make sure you add http:https
         siteUrl: `https://font.sakamata.ch`,
         // if you are using trailingSlash gatsby config include it here, as well (the default is 'always')
         trailingSlash: 'always',
+        redirect: false,
+        generateDefaultLanguagePage: true,
         // you can pass any i18next options
         i18nextOptions: {
-          interpolation: {
-            escapeValue: false // not needed for react as it escapes by default
-          },
           keySeparator: false,
           nsSeparator: false
-        },
-        pages: [
-          /*{
-            matchPath: '/:lang?/',
-            getLanguageFromPath: true,
-            languages: ['en', 'ja']
-          }*/
-        ]
+        }
       }
     }
   ]
