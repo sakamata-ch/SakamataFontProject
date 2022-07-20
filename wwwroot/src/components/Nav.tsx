@@ -1,10 +1,11 @@
 import { Navigation, Theme } from '@canonical/react-components'
-import { Link, Trans, useTranslation } from 'gatsby-plugin-react-i18next';
+import { useTranslation, useI18next } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
 export default function Nav(): JSX.Element {
 
   const { t } = useTranslation();
+  const { language } = useI18next();
 
   return (
     <div>
@@ -15,15 +16,15 @@ export default function Nav(): JSX.Element {
             items: [
               {
                 label: t('Alphabet, Number, ASCII Character'),
-                url: '/ascii'
+                url: `/${language}/ascii`
               },
               {
                 label: t('Hiragana, Katakana'),
-                url: '/hiragana-katakana'
+                url: `/${language}/hiragana-katakana`
               },
               {
                 label: t('All Characters'),
-                url: '/all-chars'
+                url: `/${language}/all-chars`
               }
             ]
           },
@@ -44,7 +45,7 @@ export default function Nav(): JSX.Element {
         logo={{
           src: "/favicon.svg",
           title: t('Sakamata Font Project'),
-          url: '/'
+          url: `/${language}/`
         }}
         theme={Theme.DARK}
       />
