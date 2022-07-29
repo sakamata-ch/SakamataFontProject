@@ -36,6 +36,6 @@ foreach (var s in sources)
     list += $"- {s}{Environment.NewLine}";
 }
 
-string message = $@"{pre}{Environment.NewLine}{list}{post}";
+string message = $@"{pre}{Environment.NewLine}{list}{Environment.NewLine}{post}";
 
 System.IO.File.WriteAllText("message.md", message, System.Text.Encoding.UTF8);
