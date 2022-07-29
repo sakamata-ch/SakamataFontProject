@@ -84,7 +84,6 @@ jobs:
       - name: Copy data
         run: |
           cp chart-generator/output/char.tsv wwwroot/static/
-          cp build/sakamata-v1.woff2 wwwroot/static/sakamata.woff2
           mkdir wwwroot/src/images
           cp build/svg/あ.svg wwwroot/src/images/icon.svg
 
@@ -100,3 +99,13 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wwwroot/public
+
+      - name: Deploy font files
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.BLOB_UPLOAD_USER }}
+          server: ${{ secrets.BLOB_UPLOAD_HOST }}
+          ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
+          sftp_only: true
+          local_path: "./build/*.woff2"
+          remote_path: "/blob.sakamata.ch/font/"
