@@ -9,7 +9,7 @@ on:
       - "build/**"
       - "chart-generator/**"
       - "raw/**"
-      - "webroot/**"
+      - "wwwroot/**"
 
 jobs:
   build:
