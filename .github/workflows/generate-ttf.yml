@@ -2,7 +2,12 @@ name: TTF Builder
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/generate-ttf.yml"
+      - "build/**"
+      - "raw/**"
 
 jobs:
   build:
@@ -21,12 +26,6 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
-      - name: Install woff2
-        run: sudo apt-get install -y woff2
-
-      - name: Restore dependencies
-        run: dotnet restore chart-generator/chart-generator.csproj
-
       - name: Run file copy tool
         run: |
           cd build
@@ -37,11 +36,20 @@ jobs:
           cd build
           svgs2ttf/svgs2ttf metadata.json
 
-      - name: Compress to woff2
-        run: woff2_compress build/sakamata-v1.ttf
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: sakamata-font
-          path: build/sakamata-*
+          path: build/*.ttf
+
+      - name: Set current datetime as env variable
+        env:
+          TZ: "Etc/UTC"
+        run: echo "DTIME=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
+
+      - name: Pre Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: v${{ env.CURRENT_DATETIME }}
+          files: build/*.ttf
