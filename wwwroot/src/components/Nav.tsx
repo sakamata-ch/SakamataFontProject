@@ -1,6 +1,7 @@
 import { Navigation, Theme } from '@canonical/react-components'
-import { useTranslation, useI18next } from 'gatsby-plugin-react-i18next';
+import { useTranslation, useI18next, Trans } from 'gatsby-plugin-react-i18next';
 import React from 'react';
+import 'bootstrap-icons/font/bootstrap-icons.scss'
 
 export default function Nav(): JSX.Element {
 
@@ -25,6 +26,10 @@ export default function Nav(): JSX.Element {
               {
                 label: t('All Characters'),
                 url: `/${language}/all-chars`
+              },
+              {
+                label: <><i className="bi bi-box-arrow-up-right"></i> <Trans>Source Contents</Trans></>,
+                url: `/sakamata-v1.sources.tsv`
               }
             ]
           },
@@ -32,11 +37,11 @@ export default function Nav(): JSX.Element {
             label: t('Downloads'),
             items: [
               {
-                label: t('Release'),
+                label: <><i className="bi bi-box-arrow-up-right"></i> <Trans>Release</Trans></>,
                 url: 'https://github.com/sakamata-ch/SakamataFontProject/releases/latest'
               },
               {
-                label: t('Nightly'),
+                label: <><i className="bi bi-box-arrow-up-right"></i> <Trans>Nightly</Trans></>,
                 url: 'https://github.com/sakamata-ch/SakamataFontProject/releases'
               }
             ]

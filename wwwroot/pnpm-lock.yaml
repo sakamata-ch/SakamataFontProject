@@ -15,6 +15,7 @@ specifiers:
   '@types/react': ^18.0.14
   '@types/react-dom': ^18.0.5
   babel-eslint: ^10.0.0
+  bootstrap-icons: ^1.9.1
   eslint: '>= 4.12.1'
   gatsby: ^4.18.0
   gatsby-plugin-google-analytics: ^4.18.0
@@ -40,6 +41,7 @@ specifiers:
 dependencies:
   '@canonical/react-components': 0.37.3_azuhgu7uo4wrnyxqw6nj4ifgvm
   babel-eslint: 10.1.0_eslint@7.32.0
+  bootstrap-icons: 1.9.1
   eslint: 7.32.0
   gatsby: 4.18.1_oa6dif4pse4a34ak2rds5slply
   gatsby-plugin-google-analytics: 4.18.0_kr7cifb2ttzyw5knebcjfaft7m
@@ -4140,6 +4142,10 @@ packages:
 
   /boolbase/1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+    dev: false
+
+  /bootstrap-icons/1.9.1:
+    resolution: {integrity: sha512-d4ZkO30MIkAhQ2nNRJqKXJVEQorALGbLWTuRxyCTJF96lRIV6imcgMehWGJUiJMJhglN0o2tqLIeDnMdiQEE9g==}
     dev: false
 
   /boxen/4.2.0:

@@ -42,27 +42,21 @@ jobs:
           cd build
           svgs2ttf/svgs2ttf metadata.json
 
-      # CHART GEN
-
-      - name: Run chart-generator
-        run: |
-          cd chart-generator
-          mkdir output
-          dotnet run
-
       # Upload
 
       - uses: actions/upload-artifact@v3
         with:
           name: generated-site-items
-          path: build/svg/あ.svg
+          path: |
+            build/svg/あ.svg
+            build/*.sources.tsv
 
       - uses: actions/upload-artifact@v3
         with:
           name: generated-font
-          path: build/*.ttf
-
-      # SITE GEN
+          path: |
+            build/*.ttf
+            build/*.sources.tsv
 
   gen-chart:
     runs-on: ubuntu-latest
@@ -77,7 +71,6 @@ jobs:
       - name: Run chart-generator
         run: |
           cd chart-generator
-          mkdir output
           dotnet run
 
       - uses: actions/upload-artifact@v3
@@ -135,6 +128,7 @@ jobs:
       - name: Copy data
         run: |
           cp ~/artifact/chart/char.tsv wwwroot/static/
+          cp ~/artifact/site/*.sources.tsv wwwroot/static/
           mkdir wwwroot/src/images
           cp ~/artifact/site/あ.svg wwwroot/src/images/icon.svg
 
