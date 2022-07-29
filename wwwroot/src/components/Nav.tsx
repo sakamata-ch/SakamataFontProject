@@ -28,7 +28,7 @@ export default function Nav(): JSX.Element {
                 url: `/${language}/all-chars`
               },
               {
-                label: <><i className="bi bi-box-arrow-up-right"></i> <Trans>Source Contents</Trans></>,
+                label: <><i class="bi bi-download"></i> <Trans>Source Contents</Trans> (TSV)</>,
                 url: `/sakamata-v1.sources.tsv`
               }
             ]
