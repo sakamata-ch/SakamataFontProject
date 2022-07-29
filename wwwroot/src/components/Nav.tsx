@@ -33,11 +33,11 @@ export default function Nav(): JSX.Element {
             items: [
               {
                 label: t('Release'),
-                url: 'https://github.com/sakamata-ch/SakamataFontProject/releases'
+                url: 'https://github.com/sakamata-ch/SakamataFontProject/releases/latest'
               },
               {
                 label: t('Nightly'),
-                url: 'https://github.com/sakamata-ch/SakamataFontProject/actions/workflows/generate-ttf.yml'
+                url: 'https://github.com/sakamata-ch/SakamataFontProject/releases'
               }
             ]
           }
