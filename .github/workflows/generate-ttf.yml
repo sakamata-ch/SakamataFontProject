@@ -2,8 +2,6 @@ name: TTF Builder
 
 on:
   push:
-    branches:
-      - "master"
     paths:
       - ".github/workflows/generate-ttf.yml"
       - "build/**"
@@ -40,18 +38,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sakamata-font
-          path: build/*.ttf
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    if: ${{ !contains(github.event.commits.*.message, '[skip release]') }}
-
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: sakamata-font
-          path: build
+          path: |
+            build/*.ttf
+            build/*.sources.tsv
 
       - name: Set current datetime as env variable
         env:
@@ -69,6 +58,10 @@ jobs:
           body: |
             このリリースは${{ env.NOWTIME }}時点のデータを利用したリリースです。安定版ではありません。
 
+            収録文字・元配信は`sources.tsv`ファイルに記録されています。
+
             このプロジェクトはホロライブ二次創作ガイドラインに準拠して実施されています。
             成果物はホロライブ二次創作ガイドラインの範囲でのみ利用が可能です。
-          files: build/*.ttf
+          files: |
+            build/*.ttf
+            build/*.sources.tsv

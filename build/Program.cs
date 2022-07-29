@@ -1,9 +1,11 @@
-﻿var files = System.IO.Directory.GetFiles("../raw", "?.png", SearchOption.AllDirectories);
+﻿var orig_files = ChartGenerator.CGProg.GetImages();
+Dictionary<char, List<string>> images = orig_files.ToDictionary(c => c.Key, f => f.Value.Select(i => i.Item1).ToList());
+var file_source = ChartGenerator.CGProg.GenSourceList(orig_files, false);
 
-var images = new Dictionary<char, List<string>>() {
-    {' ', new List<string>() {"../raw/_SYS/SPACE.png"}},
-};
+// Add SPACE to the list of characters
+images.Add(' ', new List<string>() { "../raw/_SYS/SPACE.png" });
 
+// These chars can use same image.
 var reuse_chars = new (char, char)[] {
     ('＼', '\\'),
     ('／', '/'),
@@ -15,15 +17,6 @@ var reuse_chars = new (char, char)[] {
     ('＞', '>'),
     ('＜', '<'),
 };
-
-foreach (var i in files)
-{
-    char chr = i.Substring(i.Length - 5, 1)[0];
-    if (!images.ContainsKey(chr))
-        images.Add(chr, new List<string>());
-
-    images[chr].Add(i);
-}
 
 Console.WriteLine("Converting to Bitmap");
 foreach (var i in images)
@@ -60,6 +53,9 @@ foreach (var i in useImages)
 }
 
 string template_meta = File.ReadAllText("_template_metadata.json", System.Text.Encoding.UTF8)
-    .Replace("/*GLYPHS*/", string.Join(",", import_json));
+    .Replace("/*GLYPHS*/", string.Join(",", import_json))
+    .Replace("/*FILENAME*/", "sakamata-v1");
 
 File.WriteAllText("metadata.json", template_meta, new System.Text.UTF8Encoding(false));
+
+File.WriteAllLines("sakamata-v1.sources.tsv", file_source, System.Text.Encoding.UTF8);

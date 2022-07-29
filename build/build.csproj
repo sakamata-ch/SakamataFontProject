@@ -7,4 +7,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\chart-generator\chart-generator.csproj" />
+  </ItemGroup>
+
 </Project>

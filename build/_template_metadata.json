@@ -7,7 +7,7 @@
     },
     "input": "svg",
     "output": [
-        "sakamata-v1.ttf"
+        "/*FILENAME*/.ttf"
     ],
     "glyphs": {
         /*GLYPHS*/
