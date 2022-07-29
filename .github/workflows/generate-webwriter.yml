@@ -2,7 +2,14 @@ name: Webwriter
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/generate-webwriter.yml"
+      - "build/**"
+      - "chart-generator/**"
+      - "raw/**"
+      - "webroot/**"
 
 jobs:
   build:
