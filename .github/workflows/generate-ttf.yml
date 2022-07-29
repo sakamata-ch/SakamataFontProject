@@ -5,6 +5,7 @@ on:
     paths:
       - ".github/workflows/generate-ttf.yml"
       - "build/**"
+      - "chart-generator/**"
       - "raw/**"
 
 jobs:
