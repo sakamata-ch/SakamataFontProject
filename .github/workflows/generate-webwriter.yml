@@ -162,7 +162,11 @@ jobs:
       - name: Compress to woff2
         run: |
           woff2_compress fonts/sakamata-v1.ttf
-          rm fonts/*.ttf
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: webfont
+          path: fonts/*.woff2
 
       - name: Deploy font files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -171,5 +175,5 @@ jobs:
           server: ${{ secrets.BLOB_UPLOAD_HOST }}
           ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
           sftp_only: true
-          local_path: "./fonts/*"
-          remote_path: "/blob.sakamata.ch/font/"
+          local_path: "./fonts/*.woff2"
+          remote_path: "/blob.sakamata.ch/font"
