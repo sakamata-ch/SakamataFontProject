@@ -176,4 +176,4 @@ jobs:
           ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
           sftp_only: true
           local_path: "./fonts/*.woff2"
-          remote_path: "/blob.sakamata.ch/font"
+          remote_path: "/blob.sakamata.ch/font/"
