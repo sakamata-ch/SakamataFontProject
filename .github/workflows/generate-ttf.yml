@@ -44,12 +44,19 @@ jobs:
 
       - name: Set current datetime as env variable
         env:
-          TZ: "Etc/UTC"
-        run: echo "DTIME=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
+          TZ: "Asia/Tokyo"
+        run: |
+          echo "DTIME=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
+          echo "NOWTIME=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
       - name: Pre Release
         uses: softprops/action-gh-release@v1
         with:
           prerelease: true
           tag_name: v${{ env.DTIME }}
+          body: |
+            このリリースは${{ env.NOWTIME }}時点のデータを利用したリリースです。安定版ではありません。
+
+            このプロジェクトはホロライブ二次創作ガイドラインに準拠して実施されています。
+            成果物はホロライブ二次創作ガイドラインの範囲でのみ利用が可能です。
           files: build/*.ttf
