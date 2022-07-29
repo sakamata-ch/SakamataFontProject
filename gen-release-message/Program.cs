@@ -22,7 +22,7 @@ DateTime time_asia_tokyo = DateTime.UtcNow + TimeSpan.FromHours(9);
 
 string pre = $@"このリリースは{time_asia_tokyo.ToString("yyyy/MM/dd HH:mm:ss")} JST時点のデータを利用したものです。安定版ではありません。
 
-下記で利用されたの文字を収録しています。";
+下記で利用された文字を収録しています。";
 
 string post = $@"文字ごとの元配信一覧は`<フォント名>.sources.tsv`ファイルに記録されています。
 
