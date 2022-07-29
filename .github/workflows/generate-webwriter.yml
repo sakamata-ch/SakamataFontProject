@@ -12,6 +12,7 @@ on:
       - "wwwroot/**"
 
 jobs:
+  ##### ===========================
   build:
     runs-on: ubuntu-latest
 
@@ -58,6 +59,7 @@ jobs:
             build/*.ttf
             build/*.sources.tsv
 
+  ##### ===========================
   gen-chart:
     runs-on: ubuntu-latest
     steps:
@@ -78,6 +80,7 @@ jobs:
           name: generated-charts
           path: chart-generator/output/*
 
+  ##### ===========================
   build-web:
     runs-on: ubuntu-latest
     needs:
@@ -130,7 +133,7 @@ jobs:
           cp ~/artifact/chart/char.tsv wwwroot/static/
           cp ~/artifact/site/*.sources.tsv wwwroot/static/
           mkdir wwwroot/src/images
-          cp ~/artifact/site/あ.svg wwwroot/src/images/icon.svg
+          cp ~/artifact/site/svg/あ.svg wwwroot/src/images/icon.svg
 
       # BUILD/DEPLOY
 
@@ -147,6 +150,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./wwwroot/public
 
+  ##### ===========================
   build-webfont:
     runs-on: ubuntu-latest
     needs: build
