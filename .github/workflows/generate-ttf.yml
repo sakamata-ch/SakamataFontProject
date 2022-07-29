@@ -57,12 +57,12 @@ jobs:
           prerelease: true
           tag_name: v${{ env.DTIME }}
           body: |
-            このリリースは${{ env.NOWTIME }}時点のデータを利用したリリースです。安定版ではありません。
+            このリリースは${{ env.NOWTIME }}時点のデータを利用したものです。安定版ではありません。
 
-            収録文字・元配信は`sources.tsv`ファイルに記録されています。
+            収録文字・元配信は`<フォント名>.sources.tsv`ファイルに記録されています。
 
-            このプロジェクトはホロライブ二次創作ガイドラインに準拠して実施されています。
-            成果物はホロライブ二次創作ガイドラインの範囲でのみ利用が可能です。
+            このプロジェクトは[ホロライブ二次創作ガイドライン](https://www.hololive.tv/terms)に準拠して実施されています。
+            成果物は[ホロライブ二次創作ガイドライン](https://www.hololive.tv/terms)の範囲内でのみ利用が可能です。
           files: |
             build/*.ttf
             build/*.sources.tsv
