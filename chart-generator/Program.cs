@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text.RegularExpressions;
 
 using YamlDotNet.Serialization;
 
@@ -8,7 +9,7 @@ namespace ChartGenerator
     {
         static void Main(string[] args)
         {
-            var images = GetImages();
+            var images = GetImages(args);
 
             var char_tsv_output = new List<string>();
             var char_src_output = new List<string>();
@@ -16,9 +17,11 @@ namespace ChartGenerator
             foreach (var i in images)
             {
                 char_tsv_output.Add($"{i.Key}\t{i.Value.Count}");
+                char_src_output.Add($"{i.Key}\t{string.Join('\t', i.Value.Select(v => v.Item1))}");
             }
 
             System.IO.File.WriteAllLines("output/char.tsv", char_tsv_output, System.Text.Encoding.UTF8);
+            System.IO.File.WriteAllLines("output/file.tsv", char_src_output, System.Text.Encoding.UTF8);
         }
 
         public static string[] GenSourceList(IDictionary<char, List<(string, string[])>> files, bool useFilename = false)
@@ -42,9 +45,27 @@ namespace ChartGenerator
             return toret.ToArray();
         }
 
-        public static SortedDictionary<char, List<(string, string[])>> GetImages()
+
+        public static SortedDictionary<char, List<(string, string[])>> GetImages(string[] args)
         {
-            var files = System.IO.Directory.GetFiles("../raw", "?.png", SearchOption.AllDirectories);
+            (FilterOption opt, _) = FilterOption.GetOptionsFromArgs(args);
+            return GetImages(opt);
+        }
+
+        public static SortedDictionary<char, List<(string, string[])>> GetImages(FilterOption? opt = null)
+        {
+            if (opt == null)
+                (opt, _) = FilterOption.GetOptionsFromArgs(new string[] { });
+
+            string APPDIR = opt.RawDir ?? (Directory.Exists("../raw") ? "." : AppDomain.CurrentDomain.BaseDirectory);
+            string RAWDIR = Path.Combine(APPDIR, "..", "raw");
+
+            var files = System.IO.Directory.GetFiles(RAWDIR, (opt.NoAlt && opt.Weight == 0) ? "?.png" : "*.png", SearchOption.AllDirectories);
+
+            if (opt.NoAlt && opt.Weight != 0)
+                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(" + opt.Weight.ToString() + @")\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
+            else
+                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(\d{3})\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
 
             var images = new SortedDictionary<char, List<(string, string[])>>();
 
@@ -52,9 +73,9 @@ namespace ChartGenerator
 
             foreach (var i in files)
             {
-                string no_rel_path = i.Substring(7);
+                string no_rel_path = i.Substring(APPDIR.Length + 7);
                 string container_dir = no_rel_path.Replace('\\', '/').Split('/')[0];
-                string src_file = i.Substring(0, 7) + container_dir + "/source.yml";
+                string src_file = Path.Combine(RAWDIR, container_dir, "source.yml");
 
                 List<string> source_info_list = new();
 

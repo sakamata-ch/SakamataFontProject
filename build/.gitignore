@@ -405,5 +405,6 @@ FodyWeavers.xsd
 !/svg/.gitkeep
 !/svg/_EMPTY.svg
 
-/metadata.json
-/sakamata-*
+/*.metadata.json
+/*.ttf
+/*sources.tsv

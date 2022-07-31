@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="svgs2ttf\**" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="_template_metadata.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="_EMPTY.svg" CopyToOutputDirectory="PreserveNewest" />
+
     <ProjectReference Include="..\chart-generator\chart-generator.csproj" />
   </ItemGroup>
 

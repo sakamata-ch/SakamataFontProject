@@ -5,7 +5,7 @@
         "em": 1000,
         "family": "Sakamata Chloe Font"
     },
-    "input": "svg",
+    "input": "workdir",
     "output": [
         "/*FILENAME*/.ttf"
     ],
