@@ -60,15 +60,27 @@ namespace ChartGenerator
             string APPDIR = opt.RawDir ?? (Directory.Exists("../raw") ? "." : AppDomain.CurrentDomain.BaseDirectory);
             string RAWDIR = Path.Combine(APPDIR, "..", "raw");
 
-            var files = System.IO.Directory.GetFiles(RAWDIR, (opt.NoAlt && opt.Weight == 0) ? "?.png" : "*.png", SearchOption.AllDirectories);
-
-            if (opt.NoAlt && opt.Weight != 0)
-                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(" + opt.Weight.ToString() + @")\]).\.png$", RegexOptions.IgnoreCase)).ToArray();
-            else
-                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(\d{3})\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
-
             var images = new SortedDictionary<char, List<(string, string[])>>();
 
+            var files = System.IO.Directory.GetFiles(RAWDIR, (opt.NoAlt && opt.Weight == 0) ? "?.png" : "*.png", SearchOption.AllDirectories);
+            files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(\d{3})\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
+
+            if (opt.Weight != 0)
+            {
+                var specified_files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(" + opt.Weight.ToString() + @")\]).\.png$", RegexOptions.IgnoreCase)).ToArray();
+                GetImagesViaFileList(ref images, specified_files, RAWDIR);
+
+                if (opt.NoAlt)
+                    return images;
+            }
+
+            GetImagesViaFileList(ref images, files, RAWDIR);
+
+            return images;
+        }
+
+        private static void GetImagesViaFileList(ref SortedDictionary<char, List<(string, string[])>> images, string[] files, string RAWDIR)
+        {
             var ymldes = new Deserializer();
 
             foreach (var i in files)
@@ -99,8 +111,6 @@ namespace ChartGenerator
 
                 images[chr].Add((i, source_info_list.ToArray()));
             }
-
-            return images;
         }
     }
 }
