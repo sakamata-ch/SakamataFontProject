@@ -48,6 +48,7 @@ jobs:
   ##### ===========================
   gen-icon:
     runs-on: ubuntu-latest
+    needs: gen-chart
     steps:
       - uses: actions/checkout@v3
 
