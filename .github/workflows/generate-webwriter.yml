@@ -2,10 +2,9 @@ name: Webwriter
 
 on:
   push:
-    branches:
-      - "master"
     paths:
       - ".github/workflows/generate-webwriter.yml"
+      - ".github/workflows/generate-ttf.yml"
       - "build/**"
       - "chart-generator/**"
       - "raw/**"
@@ -18,41 +17,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Build
+        uses: ./.github/actions/build-ttf
         with:
-          submodules: true
-
-      # DEPEND
-
-      - name: Install requirements
-        run: build/_install_reqs_ubuntu.sh
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 6.0.x
-
-      # TTF/WOFF2 BUILD
-
-      - name: Run build
-        run: |
-          cd build
-          dotnet run
-
-      # Upload
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: generated-site-items
-          path: |
-            build/workdir/あ.svg
-            build/*.sources.tsv
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: generated-font
-          path: |
-            build/*.ttf
-            build/*.sources.tsv
+          weight: 0
+          strict: nostrict
 
   ##### ===========================
   gen-chart:
@@ -76,10 +46,32 @@ jobs:
           path: chart-generator/output/*
 
   ##### ===========================
+  gen-icon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: generated-charts
+          path: ~/chart
+
+      - name: Extract file
+        run: |
+          cd chart
+          cp `grep -E $'^あ\t' file.tsv | head -n 1 | cut -f 2` ../あ.svg
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: icon
+          path: あ.svg
+
+  ##### ===========================
   build-web:
     runs-on: ubuntu-latest
     needs:
       - build
+      - gen-icon
       - gen-chart
 
     steps:
@@ -87,13 +79,18 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: generated-site-items
-          path: ~/artifact/site
+          name: sakamata-font-0-nostrict
+          path: ~/artifact/fonts
 
       - uses: actions/download-artifact@v3
         with:
           name: generated-charts
           path: ~/artifact/chart
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: icon
+          path: ~/artifact/icon
 
       # DEP
 
@@ -126,9 +123,9 @@ jobs:
       - name: Copy data
         run: |
           cp ~/artifact/chart/char.tsv wwwroot/static/
-          cp ~/artifact/site/*.sources.tsv wwwroot/static/
+          cp ~/artifact/fonts/*.sources.tsv wwwroot/static/
           mkdir wwwroot/src/images
-          cp ~/artifact/site/workdir/あ.svg wwwroot/src/images/icon.svg
+          cp ~/artifact/icon/あ.svg wwwroot/src/images/icon.svg
 
       # BUILD/DEPLOY
 
@@ -153,7 +150,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: generated-font
+          name: sakamata-font-0-nostrict
           path: fonts
 
       - name: Install woff2
@@ -161,7 +158,7 @@ jobs:
 
       - name: Compress to woff2
         run: |
-          woff2_compress fonts/sakamata-v1.ttf
+          woff2_compress fonts/sakamata-font-0-nostrict.ttf
 
       - uses: actions/upload-artifact@v3
         with:
@@ -170,6 +167,7 @@ jobs:
 
       - name: Deploy font files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           username: ${{ secrets.BLOB_UPLOAD_USER }}
           server: ${{ secrets.BLOB_UPLOAD_HOST }}
