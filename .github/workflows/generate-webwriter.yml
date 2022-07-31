@@ -44,7 +44,7 @@ jobs:
         with:
           name: generated-site-items
           path: |
-            build/svg/あ.svg
+            build/workdir/あ.svg
             build/*.sources.tsv
 
       - uses: actions/upload-artifact@v3
@@ -128,7 +128,7 @@ jobs:
           cp ~/artifact/chart/char.tsv wwwroot/static/
           cp ~/artifact/site/*.sources.tsv wwwroot/static/
           mkdir wwwroot/src/images
-          cp ~/artifact/site/svg/あ.svg wwwroot/src/images/icon.svg
+          cp ~/artifact/site/workdir/あ.svg wwwroot/src/images/icon.svg
 
       # BUILD/DEPLOY
 
