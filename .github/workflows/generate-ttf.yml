@@ -90,5 +90,5 @@ jobs:
           tag_name: v${{ env.DTIME }}
           body_path: gen-release-message/message.md
           files: |
-            build/*.ttf
-            build/*.sources.tsv
+            fonts/*.ttf
+            fonts/*.sources.tsv
