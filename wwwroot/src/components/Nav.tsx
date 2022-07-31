@@ -29,7 +29,7 @@ export default function Nav(): JSX.Element {
               },
               {
                 label: <><i class="bi bi-download"></i> <Trans>Source Contents</Trans> (TSV)</>,
-                url: `/sakamata-v1.sources.tsv`
+                url: `/sakamata-font-0-nostrict.sources.tsv`
               }
             ]
           },
