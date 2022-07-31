@@ -15,7 +15,7 @@ Dictionary<char, List<string>> images = orig_files.ToDictionary(c => c.Key, f =>
 var file_source = ChartGenerator.CGProg.GenSourceList(orig_files, false);
 
 string APPDIR = AppDomain.CurrentDomain.BaseDirectory;
-string RAWDIR = opt.RawDir ?? APPDIR;
+string RAWDIR = opt.RawDir ?? (Directory.Exists("../raw") ? "." : APPDIR);
 
 // Ready workspace
 {
