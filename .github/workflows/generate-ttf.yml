@@ -59,8 +59,8 @@ jobs:
       - name: Copy files
         run: |
           mkdir fonts
-          cp artifacts/**.ttf fonts/
-          cp artifacts/**.sources.tsv fonts/
+          cp artifacts/**/*.ttf fonts/
+          cp artifacts/**/*.sources.tsv fonts/
 
       - name: Set current datetime as env variable
         env:
