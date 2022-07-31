@@ -31,7 +31,7 @@ namespace ChartGenerator
             foreach (var c in files)
             {
                 var tgt = c.Value[0];
-                string pkey = useFilename ? tgt.Item1.Substring(7) : c.Key.ToString();
+                string pkey = useFilename ? tgt.Item1 : c.Key.ToString();
 
                 if (tgt.Item2.Length == 0)
                 {
@@ -73,7 +73,7 @@ namespace ChartGenerator
 
             foreach (var i in files)
             {
-                string no_rel_path = i.Substring(APPDIR.Length + 7);
+                string no_rel_path = i.Substring(RAWDIR.Length + 1);
                 string container_dir = no_rel_path.Replace('\\', '/').Split('/')[0];
                 string src_file = Path.Combine(RAWDIR, container_dir, "source.yml");
 
