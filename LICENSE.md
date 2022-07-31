@@ -8,9 +8,7 @@
 
 ## `raw/_SYS` 下のデータ
 
-機械的に生成された著作権の発生しないと思われるデータです。（例: 空の画像ファイルなど）
-
-これらのデータは[Public Domain](https://creativecommons.org/publicdomain/mark/1.0)で提供されます。
+機械的に生成された[Public Domain](https://creativecommons.org/publicdomain/mark/1.0)で提供されるデータです。（例: 空の画像ファイルなど）
 
 ## サブモジュール
 
