@@ -63,7 +63,7 @@ namespace ChartGenerator
             var files = System.IO.Directory.GetFiles(RAWDIR, (opt.NoAlt && opt.Weight == 0) ? "?.png" : "*.png", SearchOption.AllDirectories);
 
             if (opt.NoAlt && opt.Weight != 0)
-                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(" + opt.Weight.ToString() + @")\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
+                files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(" + opt.Weight.ToString() + @")\]).\.png$", RegexOptions.IgnoreCase)).ToArray();
             else
                 files = files.Where(x => Regex.IsMatch(x, @"[/\\](\[(\d{3})\])*.\.png$", RegexOptions.IgnoreCase)).ToArray();
 
