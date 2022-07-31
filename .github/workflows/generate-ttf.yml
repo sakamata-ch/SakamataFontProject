@@ -23,26 +23,12 @@ jobs:
         with:
           submodules: true
 
-      - name: Install requirements
-        run: build/_install_reqs_ubuntu.sh
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+      - name: Build
+        uses: ./.github/actions/build-ttf
         with:
-          dotnet-version: 6.0.x
+          weight: ${{ matrix.weight }}
+          strict: ${{ matrix.strict }}
 
-      - name: Run build
-        run: |
-          cd build
-          dotnet run -- --weight ${{ matrix.weight }} --${{ matrix.strict }} --filename sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}
-          path: |
-            build/*.ttf
-            build/*.sources.tsv
 
   upload:
     runs-on: ubuntu-latest
