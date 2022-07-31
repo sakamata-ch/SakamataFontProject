@@ -55,7 +55,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: generated-charts
-          path: ~/chart
+          path: chart
 
       - name: Extract file
         run: |
