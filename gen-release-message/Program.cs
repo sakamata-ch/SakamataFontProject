@@ -26,6 +26,8 @@ string pre = $@"このリリースは{time_asia_tokyo.ToString("yyyy/MM/dd HH:mm
 
 string post = $@"文字ごとの元配信一覧は`<フォント名>.sources.tsv`ファイルに記録されています。
 
+まず試してみるという用途であれば`sakamata-font-0-nostrict.ttf`をご利用ください。
+
 このプロジェクトは[ホロライブ二次創作ガイドライン](https://www.hololive.tv/terms)に準拠して実施されています。
 成果物は[ホロライブ二次創作ガイドライン](https://www.hololive.tv/terms)の範囲内でのみ利用できます。";
 
