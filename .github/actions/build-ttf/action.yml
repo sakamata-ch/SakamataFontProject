@@ -39,7 +39,7 @@ runs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.filename-prefix }}-${{ matrix.weight }}-${{ matrix.strict }}
+        name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
         path: |
           build/*.ttf
           build/*.sources.tsv
