@@ -1,0 +1,45 @@
+name: Build TTF
+description: Build TTF
+inputs:
+  strict:
+    default: "nostrict"
+    required: false
+    description: "Strict or not strict"
+  weight:
+    default: "0"
+    required: false
+    description: "Font weight"
+  filename-prefix:
+    default: "sakamata-font"
+    required: false
+    description: "Font filename prefix"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Install requirements
+      shell: bash
+      run: build/_install_reqs_ubuntu.sh
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Run build
+      shell: bash
+      run: |
+        cd build
+        dotnet run -- --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
+        path: |
+          build/*.ttf
+          build/*.sources.tsv
