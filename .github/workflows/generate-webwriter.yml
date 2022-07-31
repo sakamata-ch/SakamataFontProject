@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/generate-webwriter.yml"
-      - ".github/workflows/generate-ttf.yml"
+      - ".github/actions/build-ttf/action.yml"
       - "build/**"
       - "chart-generator/**"
       - "raw/**"
