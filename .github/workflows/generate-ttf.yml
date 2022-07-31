@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/generate-ttf.yml"
+      - ".github/actions/build-ttf/action.yml"
       - "build/**"
       - "chart-generator/**"
       - "raw/**"
@@ -28,7 +29,6 @@ jobs:
         with:
           weight: ${{ matrix.weight }}
           strict: ${{ matrix.strict }}
-
 
   upload:
     runs-on: ubuntu-latest
