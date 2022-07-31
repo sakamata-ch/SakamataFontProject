@@ -11,6 +11,7 @@ namespace ChartGenerator
             {
                 { "h|help", "Show this help and exit", v => toret.Help = v != null },
                 { "s|strict", "Do not use another weight font in case not available", v => toret.NoAlt = v != null },
+                { "nostrict", "Use another weight font in case not available (default)", v => toret.NoAlt = !(v != null) },
                 { "w|weight=", "Font weight", (int v) => toret.Weight = v },
                 { "rawdir=", "Original png Directory", v => toret.RawDir = v },
             };
