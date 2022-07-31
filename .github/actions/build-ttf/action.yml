@@ -32,7 +32,9 @@ runs:
 
     - name: Run build
       shell: bash
-      run: dotnet run --project build/build.csproj -- --rawdir ./raw --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
+      run: |
+        cd build
+        dotnet run -- --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
