@@ -59,7 +59,7 @@ export default function Home() {
   const [chars, setChars] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('https://blob.sakamata.ch/font/char.tsv').then(res => res.text()).then(data => {
+    fetch('https://font-assets.sakamata.ch/char.tsv').then(res => res.text()).then(data => {
       let chars: string[] = [];
 
       String(data).split('\n').forEach(function (l: string) {
