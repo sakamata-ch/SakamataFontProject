@@ -14,4 +14,6 @@ jobs:
 
     steps:
     - name: Call hook
-      run: curl -X POST ${CF_PAGES_HOOKURL}
+      env:
+        CF_PAGES_HOOKURL: ${{ secrets.CF_PAGES_HOOKURL }}
+      run: curl -X POST $CF_PAGES_HOOKURL
