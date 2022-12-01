@@ -1,0 +1,17 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - ".github/workflows/deploy-website.yml"
+      - "wwwroot/**"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Call hook
+      run: curl -X POST ${CF_PAGES_HOOKURL}
