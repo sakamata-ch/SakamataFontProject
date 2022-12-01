@@ -48,7 +48,7 @@ export default function Nav(): JSX.Element {
           }
         ]}
         logo={{
-          src: "/favicon.svg",
+          src: "/icons/icon-48x48.png",
           title: t('Sakamata Font Project'),
           url: `/${language}/`
         }}
