@@ -46,113 +46,120 @@ jobs:
           path: chart-generator/output/*
 
   ##### ===========================
-  gen-icon:
-    runs-on: ubuntu-latest
-    needs: gen-chart
-    steps:
-      - uses: actions/checkout@v3
+  #gen-icon:
+  #  runs-on: ubuntu-latest
+  #  needs: gen-chart
+  #  steps:
+  #    - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: generated-charts
-          path: chart
+  #    - uses: actions/download-artifact@v3
+  #      with:
+  #        name: generated-charts
+  #        path: chart
 
-      - name: Extract file
-        run: |
-          cd chart
-          cp `grep -E $'^あ\t' file.tsv | head -n 1 | cut -f 2` ../あ.svg
+  #    - name: Extract file
+  #      run: |
+  #        cd chart
+  #        cp `grep -E $'^あ\t' file.tsv | head -n 1 | cut -f 2` ../あ.svg
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: icon
-          path: あ.svg
+  #    - uses: actions/upload-artifact@v3
+  #      with:
+  #        name: icon
+  #        path: あ.svg
 
   ##### ===========================
-  build-web:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - gen-icon
-      - gen-chart
+  #build-web:
+  #  runs-on: ubuntu-latest
+  #  needs:
+  #    - build
+  #    - gen-icon
+  #    - gen-chart
 
-    steps:
-      - uses: actions/checkout@v3
+  #  steps:
+  #    - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: sakamata-font-0-nostrict
-          path: ~/artifact/fonts
+  #    - uses: actions/download-artifact@v3
+  #      with:
+  #        name: sakamata-font-0-nostrict
+  #        path: ~/artifact/fonts
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: generated-charts
-          path: ~/artifact/chart
+  #    - uses: actions/download-artifact@v3
+  #      with:
+  #        name: generated-charts
+  #        path: ~/artifact/chart
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: icon
-          path: ~/artifact/icon
+  #    - uses: actions/download-artifact@v3
+  #      with:
+  #        name: icon
+  #        path: ~/artifact/icon
 
-      # DEP
+  #    # DEP
 
-      - name: Setup Node
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: "16.x"
+  #    - name: Setup Node
+  #      uses: actions/setup-node@v2.1.2
+  #      with:
+  #        node-version: "16.x"
 
-      - uses: pnpm/action-setup@v2.0.1
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
+  #    - uses: pnpm/action-setup@v2.0.1
+  #      name: Install pnpm
+  #      id: pnpm-install
+  #      with:
+  #        version: 7
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+  #    - name: Get pnpm store directory
+  #      id: pnpm-cache
+  #      run: |
+  #        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+  #    - uses: actions/cache@v3
+  #      name: Setup pnpm cache
+  #      with:
+  #        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+  #        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+  #        restore-keys: |
+  #          ${{ runner.os }}-pnpm-store-
 
-      # place files
+  #    # place files
 
-      - name: Copy data
-        run: |
-          cp ~/artifact/chart/char.tsv wwwroot/static/
-          cp ~/artifact/fonts/*.sources.tsv wwwroot/static/
-          mkdir wwwroot/src/images
-          cp ~/artifact/icon/あ.svg wwwroot/src/images/icon.svg
+  #    - name: Copy data
+  #      run: |
+  #        cp ~/artifact/chart/char.tsv wwwroot/static/
+  #        cp ~/artifact/fonts/*.sources.tsv wwwroot/static/
+  #        mkdir wwwroot/src/images
+  #        cp ~/artifact/icon/あ.svg wwwroot/src/images/icon.svg
 
-      # BUILD/DEPLOY
+  #    # BUILD/DEPLOY
 
-      - name: Build Site
-        run: |
-          cd wwwroot/
-          pnpm install
-          pnpm run build
+  #    - name: Build Site
+  #      run: |
+  #        cd wwwroot/
+  #        pnpm install
+  #        pnpm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/master' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./wwwroot/public
+  #    - name: Deploy
+  #      uses: peaceiris/actions-gh-pages@v3
+  #      if: ${{ github.ref == 'refs/heads/master' }}
+  #      with:
+  #        github_token: ${{ secrets.GITHUB_TOKEN }}
+  #        publish_dir: ./wwwroot/public
 
   ##### ===========================
   build-webfont:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - build
+      - gen-chart
 
     steps:
       - uses: actions/download-artifact@v3
         with:
           name: sakamata-font-0-nostrict
           path: fonts
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: generated-charts
+          path: ~/artifact/chart
 
       - name: Install woff2
         run: sudo apt-get install -y woff2
@@ -166,6 +173,13 @@ jobs:
           name: webfont
           path: fonts/*.woff2
 
+      - name: Copy data
+        run: |
+          mkdir toupload
+          cp fonts/*.woff2 toupload/
+          cp fonts/*.sources.tsv toupload/
+          cp ~/artifact/chart/char.tsv toupload/
+
       - name: Deploy font files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -174,5 +188,5 @@ jobs:
           server: ${{ secrets.BLOB_UPLOAD_HOST }}
           ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
           sftp_only: true
-          local_path: "./fonts/*.woff2"
+          local_path: "./toupload/*"
           remote_path: "/blob.sakamata.ch/font/"
