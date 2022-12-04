@@ -1,9 +1,0 @@
-node_modules/
-.cache/
-public
-src/gatsby-types.d.ts
-
-/static/*.woff2
-/static/*.tsv
-
-*.log
