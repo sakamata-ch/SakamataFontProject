@@ -1,36 +1,20 @@
 # Sakamata Font Project ライセンス情報
 
-## `raw` 下のデータ
+プロジェクト内の画像データ・フォント関連の成果物は[hololive productionの二次創作ガイドライン](https://www.hololive.tv/terms)に準拠する形で公開されます。
 
-`raw/_SYS`を除き、すべてのデータは、[hololive productionの二次創作ガイドライン](https://www.hololive.tv/terms)に準拠する形で利用されています。
+これは、画像・成果物が当該ガイドラインのもとで公開されているデータを元に作られているためです。
 
-これらのデータの著作権はカバー株式会社等が保有しており、リポジトリオーナー、コントリビューターは一切の権利を有しておりません。
+これらのデータについての権利をリポジトリオーナー、コントリビューターは保有しておりません。
+
+## 上記のライセンスが適用されないファイル
 
 ## `raw/_SYS` 下のデータ
 
 機械的に生成された[Public Domain](https://creativecommons.org/publicdomain/mark/1.0)で提供されるデータです。（例: 空の画像ファイルなど）
 
-## サブモジュール
+## `gen-release-message`
 
-GitのサブモジュールについてはそれぞれのGitリポジトリ内のライセンスが適用されます。
-
-## `build/_template_metadata.json`
-
-[svgs2ttf](https://github.com/pteromys/svgs2ttf)内の[README.md](https://github.com/pteromys/svgs2ttf/blob/7015be7c11927917a39089afeb69e5d085cf0a4e/README.md)内のコードを改変し利用しています。
-
-リポジトリ内の`LICENSE`に従い、`GNU General Public License v3.0`でライセンスされています。
-
-## `ttf`などのフォントに関連する成果物
-
-フォント関連の成果物は[hololive productionの二次創作ガイドライン](https://www.hololive.tv/terms)に準拠する形で公開されます。
-
-これは、成果物が当該ガイドラインのもとで公開されているデータを元に作られているためです。
-
-これらのデータについての権利をリポジトリオーナー、コントリビューターは保有しておりません。
-
-## それ以外のデータ
-
-ビルド用のメタデータ生成ツールやWebページなどの上記に無いデータは一部を除き[MIT License](https://opensource.org/licenses/mit-license.php)で提供されます。
+リリースメッセージ生成ツールは[MIT License](https://opensource.org/licenses/mit-license.php)で提供されます。
 
 ```
 Copyright 2022 mkaraki

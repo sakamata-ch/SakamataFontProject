@@ -18,12 +18,16 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
+
+    - uses: actions/checkout@v3
       with:
+        repository: "mkaraki/Png2Font"
         submodules: true
+        path: "builder"
 
     - name: Install requirements
       shell: bash
-      run: build/_install_reqs_ubuntu.sh
+      run: builder/build/_install_reqs_ubuntu.sh
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
@@ -33,13 +37,13 @@ runs:
     - name: Run build
       shell: bash
       run: |
-        cd build
-        dotnet run -- --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
+        cd builder/build
+        dotnet run -- --rawdir ../../raw --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
         path: |
-          build/*.ttf
-          build/*.sources.tsv
+          builder/build/*.ttf
+          builder/build/*.sources.tsv

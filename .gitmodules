@@ -1,3 +1,0 @@
-[submodule "build/svgs2ttf"]
-	path = build/svgs2ttf
-	url = https://github.com/pteromys/svgs2ttf.git

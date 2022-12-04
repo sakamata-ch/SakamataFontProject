@@ -5,8 +5,6 @@ on:
     paths:
       - ".github/workflows/generate-ttf.yml"
       - ".github/actions/build-ttf/action.yml"
-      - "build/**"
-      - "chart-generator/**"
       - "raw/**"
       - "gen-release-message/**"
 
