@@ -8,11 +8,11 @@
 
 ## 上記のライセンスが適用されないファイル
 
-## `raw/_SYS` 下のデータ
+### `raw/_SYS` 下のデータ
 
 機械的に生成された[Public Domain](https://creativecommons.org/publicdomain/mark/1.0)で提供されるデータです。（例: 空の画像ファイルなど）
 
-## `gen-release-message`
+### `gen-release-message`
 
 リリースメッセージ生成ツールは[MIT License](https://opensource.org/licenses/mit-license.php)で提供されます。
 
