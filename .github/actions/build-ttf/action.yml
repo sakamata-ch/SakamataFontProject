@@ -18,12 +18,8 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
-
-    - uses: actions/checkout@v3
       with:
-        repository: "mkaraki/Png2Font"
         submodules: true
-        path: "builder"
 
     - name: Install requirements
       shell: bash
