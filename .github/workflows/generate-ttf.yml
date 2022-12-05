@@ -1,7 +1,16 @@
 name: TTF Builder
 
 on:
-  - "push"
+  push:
+    paths:
+      - ".github/workflows/generate-ttf.yml"
+      - ".github/actions/build-ttf/action.yml"
+      - "raw/**"
+      - "gen-release-message/**"
+
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -14,8 +23,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
 
       - name: Build
         uses: ./.github/actions/build-ttf

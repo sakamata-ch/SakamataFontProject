@@ -1,7 +1,15 @@
 name: Webwriter
 
 on:
-  - "push"
+  push:
+    paths:
+      - ".github/workflows/generate-webwriter.yml"
+      - ".github/actions/build-ttf/action.yml"
+      - "raw/**"
+
+  pull_request:
+    branches:
+      - master
 
 jobs:
   ##### ===========================
@@ -22,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
@@ -30,13 +40,13 @@ jobs:
 
       - name: Run chart-generator
         run: |
-          cd chart-generator
-          dotnet run
+          cd builder/chart-generator
+          dotnet run --rawdir ../../raw
 
       - uses: actions/upload-artifact@v3
         with:
           name: generated-charts
-          path: chart-generator/output/*
+          path: builder/chart-generator/output/*
 
   ##### ===========================
   build-webfont:
