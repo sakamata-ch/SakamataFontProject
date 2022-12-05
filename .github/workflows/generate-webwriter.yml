@@ -1,13 +1,7 @@
 name: Webwriter
 
 on:
-  push:
-    paths:
-      - ".github/workflows/generate-webwriter.yml"
-      - ".github/actions/build-ttf/action.yml"
-      - "build/**"
-      - "chart-generator/**"
-      - "raw/**"
+  - "push"
 
 jobs:
   ##### ===========================
