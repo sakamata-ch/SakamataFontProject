@@ -8,6 +8,10 @@ on:
       - "raw/**"
       - "gen-release-message/**"
 
+  pull_request:
+    branches:
+      - master
+
 jobs:
   build:
     strategy:
