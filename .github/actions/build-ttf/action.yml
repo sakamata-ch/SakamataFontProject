@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: |
         cd builder/build
-        dotnet run -- --rawdir ../../raw --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}
+        dotnet run -- --rawdir ../../raw --weight ${{ inputs.weight }} --${{ inputs.strict }} --filename ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }} --fontname "Sakatama Chloe Font"
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
