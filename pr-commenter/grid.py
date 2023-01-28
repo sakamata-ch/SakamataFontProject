@@ -50,14 +50,16 @@ font = TTFont(os.getenv('FONTNAME'))
 glyph_set = font.getGlyphSet()
 cmap = font.getBestCmap()
 
+imgs = []
+
 for c in cmap:
     glyph_name = cmap[c]
     glyph = glyph_set[glyph_name]
     svg_path_pen = SVGPathPen(glyph_set)
     glyph.draw(svg_path_pen)
 
-    ascender = font['OS/2'].sTypoAscender
-    descender = font['OS/2'].sTypoDescender
+    ascender = font['Sakamata Chloe Font'].sTypoAscender
+    descender = font['Sakamata Chloe Font'].sTypoDescender
     width = glyph.width
     height = ascender - descender
 
