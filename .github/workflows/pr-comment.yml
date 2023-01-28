@@ -1,10 +1,10 @@
-name: TTF Builder
+name: PR Commenter
 
 on:
   pull_request:
 
 jobs:
-  build:
+  makecomment:
     strategy:
       matrix:
         weight: [0]
