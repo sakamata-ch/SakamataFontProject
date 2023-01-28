@@ -1,0 +1,58 @@
+name: PR Commenter
+
+on:
+  pull_request:
+
+jobs:
+  makecomment:
+    strategy:
+      matrix:
+        weight: [0]
+        strict: ["nostrict"]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        uses: ./.github/actions/build-ttf
+        with:
+          weight: ${{ matrix.weight }}
+          strict: ${{ matrix.strict }}
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}
+          path: artifact
+
+      - name: Install requirements
+        run: pip install pillow opencv-python matplotlib numpy cairosvg fonttools
+
+      - name: Make grid image
+        run: |
+          cd artifact
+          python ../pr-commenter/grid.py
+        env:
+          FONTNAME: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}.ttf
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
+          path: artifact/result.png
+
+      - name: Upload a picture
+        uses: devicons/public-upload-to-imgur@v2.2.1
+        id: imgur_step
+        with:
+          path: artifact/result.png
+          client_id: ${{secrets.IMGUR_CLIENT_ID}}
+
+      - name: PR comment with file
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
+
+            ![](${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }})
