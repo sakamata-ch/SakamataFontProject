@@ -43,3 +43,18 @@ runs:
         path: |
           builder/build/*.ttf
           builder/build/*.sources.tsv
+
+    - name: Upload source bitmap
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}-bmp
+        path: |
+          builder/build/workdir/*.bmp
+
+    - name: Upload source svg
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}-svg
+        path: |
+          builder/build/workdir/*.svg
+
