@@ -37,7 +37,14 @@ jobs:
         env:
           FONTNAME: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}.ttf
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
+          path: artifact/result.png
+
       - name: PR comment with file
         uses: thollander/actions-comment-pull-request@v2
         with:
+          message: |
+            sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
           filePath: artifact/result.png
