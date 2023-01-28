@@ -46,9 +46,9 @@ imgs = []
 dircontents = os.listdir('.')
 for i in dircontents:
     if i.endswith('.svg'):
-        svg2png(url=i, write_to=i + '.png')
+        svg2png(url=i, write_to=i + '.png', output_height=100)
         img = np.asarray(Image.open(i + '.png'))
-        img = image_resize(img, 100)
+        #img = image_resize(img, 100)
         imgs.append(img)
 
 pm = math.ceil(math.sqrt(len(imgs)));
