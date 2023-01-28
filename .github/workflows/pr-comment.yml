@@ -24,7 +24,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}-svg
+          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-svg
           path: artifact
 
       - name: Install requirements
