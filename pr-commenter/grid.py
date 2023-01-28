@@ -100,7 +100,7 @@ for i in range(pm * 2):
                 ax[i, j].imshow(imgs[pm*ai+j], cmap="bone")
         else:
             if pm*ai+j < len(imgs):
-                ax[i, j].text(0.05, 0.05, imgfig[pm*ai+j][0], horizontalalignment='left',
+                ax[i, j].text(0.05, 0.05, imgfig[pm*ai+j], horizontalalignment='left',
                               verticalalignment='bottom', transform=ax[i, j].transAxes)
 plt.savefig('result.png')
 # plt.show()
