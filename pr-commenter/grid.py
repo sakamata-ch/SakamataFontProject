@@ -5,10 +5,16 @@ import math
 from PIL import Image
 from matplotlib import pyplot as plt
 from cairosvg import svg2png
+from fontTools.ttLib import TTFont
+from textwrap import dedent
+from fontTools.pens.svgPathPen import SVGPathPen
 
+# https://qiita.com/scrpgil/items/7c7c0a354b3688ddfc6b
 
 # https://stackoverflow.com/a/44659589
-def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+
+
+def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     # initialize the dimensions of the image to be resized and
     # grab the image size
     dim = None
@@ -34,24 +40,43 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
         dim = (width, int(h * r))
 
     # resize the image
-    resized = cv2.resize(image, dim, interpolation = inter)
+    resized = cv2.resize(image, dim, interpolation=inter)
 
     # return the resized image
     return resized
 
 
+font = TTFont('sakamata-font-0-nostrict.ttf')
+glyph_set = font.getGlyphSet()
+cmap = font.getBestCmap()
 
+for c in cmap:
+    glyph_name = cmap[c]
+    glyph = glyph_set[glyph_name]
+    svg_path_pen = SVGPathPen(glyph_set)
+    glyph.draw(svg_path_pen)
 
-imgs = []
-dircontents = os.listdir('.')
-for i in dircontents:
-    if i.endswith('.svg'):
-        svg2png(url=i, write_to=i + '.png', output_height=100)
-        img = np.asarray(Image.open(i + '.png'))
-        #img = image_resize(img, 100)
-        imgs.append(img)
+    ascender = font['OS/2'].sTypoAscender
+    descender = font['OS/2'].sTypoDescender
+    width = glyph.width
+    height = ascender - descender
 
-pm = math.ceil(math.sqrt(len(imgs)));
+    content = dedent(f'''\
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {-ascender} {width} {height}">
+                <g transform="scale(1, -1)">
+                    <path d="{svg_path_pen.getCommands()}"/>
+                </g>
+            </svg>
+        ''')
+    with open(str(c) + ".svg", 'w') as f:
+        f.write(content)
+
+    svg2png(url=str(c) + ".svg", write_to=str(c) + '.png')
+    img = np.asarray(Image.open(str(c) + '.png'))
+    img = image_resize(img, 100)
+    imgs.append(img)
+
+pm = math.ceil(math.sqrt(len(imgs)))
 
 fig, ax = plt.subplots(pm, pm, figsize=(10, 10))
 fig.subplots_adjust(hspace=0, wspace=0)
@@ -63,5 +88,4 @@ for i in range(pm):
         if pm*i+j < len(imgs):
             ax[i, j].imshow(imgs[pm*i+j], cmap="bone")
 plt.savefig('result.png')
-#plt.show()
-
+# plt.show()

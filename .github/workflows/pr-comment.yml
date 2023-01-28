@@ -24,11 +24,11 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-svg
+          name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}
           path: artifact
 
       - name: Install requirements
-        run: pip install pillow opencv-python matplotlib numpy cairosvg
+        run: pip install pillow opencv-python matplotlib numpy cairosvg textwrap fonttools
 
       - name: Make grid image
         run: |
