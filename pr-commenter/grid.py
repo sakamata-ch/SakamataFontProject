@@ -4,7 +4,6 @@ import os
 import math
 from PIL import Image
 from matplotlib import pyplot as plt
-from cairosvg import svg2png
 from fontTools.ttLib import TTFont
 from textwrap import dedent
 from fontTools.pens.svgPathPen import SVGPathPen
@@ -58,8 +57,8 @@ for c in cmap:
     svg_path_pen = SVGPathPen(glyph_set)
     glyph.draw(svg_path_pen)
 
-    ascender = font['Sakamata Chloe Font'].sTypoAscender
-    descender = font['Sakamata Chloe Font'].sTypoDescender
+    ascender = font['OS/2'].sTypoAscender
+    descender = font['OS/2'].sTypoDescender
     width = glyph.width
     height = ascender - descender
 
