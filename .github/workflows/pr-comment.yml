@@ -28,7 +28,7 @@ jobs:
           path: artifact
 
       - name: Install requirements
-        run: pip install pillow opencv-python matplotlib numpy cairosvg fonttool japanize-matplotlib
+        run: pip install pillow opencv-python matplotlib numpy cairosvg fonttools japanize-matplotlib
 
       - name: Make grid image
         run: |
