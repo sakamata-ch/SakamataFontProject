@@ -1,0 +1,41 @@
+name: TTF Builder
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        weight: [0]
+        strict: ["nostrict"]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        uses: ./.github/actions/build-ttf
+        with:
+          weight: ${{ matrix.weight }}
+          strict: ${{ matrix.strict }}
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.filename-prefix }}-${{ inputs.weight }}-${{ inputs.strict }}-svg
+          path: artifact
+
+      - name: Install requirements
+        run: pip install pillow opencv-python matplotlib numpy cairosvg
+
+      - name: Make grid image
+        run: |
+          cd artifact
+          python ../pr-commenter/grid.py
+
+      - name: PR comment with file
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: artifact/result.png
