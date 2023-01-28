@@ -87,7 +87,7 @@ for c in cmap:
 
 pm = math.ceil(math.sqrt(len(imgs)))
 
-fig, ax = plt.subplots(pm, pm, figsize=(10, 10))
+fig, ax = plt.subplots(pm * 2, pm, figsize=(10, 10))
 fig.subplots_adjust(hspace=0, wspace=0)
 
 for i in range(pm * 2):
