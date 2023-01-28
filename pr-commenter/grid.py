@@ -4,6 +4,7 @@ import os
 import math
 from PIL import Image
 from matplotlib import pyplot as plt
+import japanize_matplotlib
 from cairosvg import svg2png
 from fontTools.ttLib import TTFont
 from textwrap import dedent
