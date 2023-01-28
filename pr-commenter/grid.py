@@ -4,7 +4,7 @@ import os
 import math
 from PIL import Image
 from matplotlib import pyplot as plt
-from cairosvg import svg2png
+#from cairosvg import svg2png
 from fontTools.ttLib import TTFont
 from textwrap import dedent
 from fontTools.pens.svgPathPen import SVGPathPen
@@ -51,6 +51,7 @@ glyph_set = font.getGlyphSet()
 cmap = font.getBestCmap()
 
 imgs = []
+imgfig = []
 
 for c in cmap:
     glyph_name = cmap[c]
@@ -58,18 +59,23 @@ for c in cmap:
     svg_path_pen = SVGPathPen(glyph_set)
     glyph.draw(svg_path_pen)
 
+    if (glyph_name.startswith('uni')):
+        bingl = bytes.fromhex(glyph_name[3:])
+        glyph_name = bingl[::-1].decode(
+            encoding='utf-16', errors='replace')
+
     ascender = font['OS/2'].sTypoAscender
     descender = font['OS/2'].sTypoDescender
     width = glyph.width
     height = ascender - descender
 
     content = dedent(f'''\
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {-ascender} {width} {height}">
-                <g transform="scale(1, -1)">
-                    <path d="{svg_path_pen.getCommands()}"/>
-                </g>
-            </svg>
-        ''')
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {-ascender} {width} {height}">
+               <g transform="scale(1, -1)">
+                   <path d="{svg_path_pen.getCommands()}"/>
+               </g>
+           </svg>
+       ''')
     with open(str(c) + ".svg", 'w') as f:
         f.write(content)
 
@@ -77,17 +83,24 @@ for c in cmap:
     img = np.asarray(Image.open(str(c) + '.png'))
     img = image_resize(img, 100)
     imgs.append(img)
+    imgfig.append(glyph_name)
 
 pm = math.ceil(math.sqrt(len(imgs)))
 
 fig, ax = plt.subplots(pm, pm, figsize=(10, 10))
 fig.subplots_adjust(hspace=0, wspace=0)
 
-for i in range(pm):
+for i in range(pm * 2):
     for j in range(pm):
+        ai = int(i / 2)
         ax[i, j].xaxis.set_major_locator(plt.NullLocator())
         ax[i, j].yaxis.set_major_locator(plt.NullLocator())
-        if pm*i+j < len(imgs):
-            ax[i, j].imshow(imgs[pm*i+j], cmap="bone")
+        if (i % 2 == 0):
+            if pm*ai+j < len(imgs):
+                ax[i, j].imshow(imgs[pm*ai+j], cmap="bone")
+        else:
+            if pm*ai+j < len(imgs):
+                ax[i, j].text(0.05, 0.05, imgfig[pm*ai+j][0], horizontalalignment='left',
+                              verticalalignment='bottom', transform=ax[i, j].transAxes)
 plt.savefig('result.png')
 # plt.show()
