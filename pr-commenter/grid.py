@@ -4,7 +4,7 @@ import os
 import math
 from PIL import Image
 from matplotlib import pyplot as plt
-#from cairosvg import svg2png
+from cairosvg import svg2png
 from fontTools.ttLib import TTFont
 from textwrap import dedent
 from fontTools.pens.svgPathPen import SVGPathPen
