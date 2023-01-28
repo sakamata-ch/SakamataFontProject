@@ -46,7 +46,7 @@ def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     return resized
 
 
-font = TTFont('sakamata-font-0-nostrict.ttf')
+font = TTFont(os.getenv('FONTNAME'))
 glyph_set = font.getGlyphSet()
 cmap = font.getBestCmap()
 

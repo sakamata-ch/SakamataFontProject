@@ -28,12 +28,14 @@ jobs:
           path: artifact
 
       - name: Install requirements
-        run: pip install pillow opencv-python matplotlib numpy cairosvg textwrap fonttools
+        run: pip install pillow opencv-python matplotlib numpy cairosvg fonttools
 
       - name: Make grid image
         run: |
           cd artifact
           python ../pr-commenter/grid.py
+        env:
+          FONTNAME: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}.ttf
 
       - name: PR comment with file
         uses: thollander/actions-comment-pull-request@v2
