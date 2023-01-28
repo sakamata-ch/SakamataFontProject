@@ -42,9 +42,17 @@ jobs:
           name: sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
           path: artifact/result.png
 
+      - name: Upload a picture
+        uses: devicons/public-upload-to-imgur@v2.2.1
+        id: imgur_step
+        with:
+          path: artifact/result.png
+          client_id: ${{secrets.IMGUR_CLIENT_ID}}
+
       - name: PR comment with file
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
             sakamata-font-${{ matrix.weight }}-${{ matrix.strict }}-grid
-          filePath: artifact/result.png
+
+            ![](${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }})
