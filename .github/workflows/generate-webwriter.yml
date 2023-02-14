@@ -94,4 +94,4 @@ jobs:
           ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
           sftp_only: true
           local_path: "./toupload/*"
-          remote_path: "/home/${{ secrets.BLOB_UPLOAD_USER }}/domains/07b8f021-4a5b-4903-bb58-1f3e540a4eb6.contentdelivernet.com/font.sakamata.ch/std"
+          remote_path: "/home/${{ secrets.BLOB_UPLOAD_USER }}/domains/07b8f021-4a5b-4903-bb58-1f3e540a4eb6.contentdelivernet.com/public_html/font.sakamata.ch/std"
