@@ -43,7 +43,7 @@ jobs:
           path: artifact/result.png
 
       - name: Upload a picture
-        uses: devicons/public-upload-to-imgur@v2.2.1
+        uses: devicons/public-upload-to-imgur@v2.2.2
         id: imgur_step
         with:
           path: artifact/result.png
