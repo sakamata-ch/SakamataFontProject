@@ -69,8 +69,10 @@ jobs:
           dotnet run ../fonts/sakamata-font-0-nostrict.sources.tsv
 
       - name: Copy release note
-        run: |
-          cp gen-release-message/message.md fonts/release-note.md
+        run: cp gen-release-message/message.md fonts/release-note.md
+
+      - name: Put release note to build summary
+        run: cat fonts/release-note.md >> $GITHUB_STEP_SUMMARY
 
       - uses: actions/upload-artifact@v4
         with:
