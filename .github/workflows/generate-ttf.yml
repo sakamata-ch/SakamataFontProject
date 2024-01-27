@@ -24,8 +24,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/checkout@v4
+        with:
+          repository: mkaraki/Png2Font
+          ref: master
+          path: Png2Font
+
       - name: Build
-        uses: mkaraki/Png2Font/.github/actions/build-ttf
+        uses: ./Png2Font/.github/actions/build-ttf
         with:
           filename-prefix: sakamata-font
           fontname: Sakamata Font
