@@ -27,17 +27,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: mkaraki/Png2Font
-          ref: master
-          path: Png2Font
+          ref: bd4075fe45f9c155d6cefd2a7f740f1ce55a216b
+          path: __builder
 
       - name: Build
-        uses: ./Png2Font/.github/actions/build-ttf
+        uses: ./__builder/.github/actions/build-ttf
         with:
           filename-prefix: sakamata-font
           fontname: Sakamata Font
           weight: ${{ matrix.weight }}
           strict: ${{ matrix.strict }}
-          builder-version: master
+          skip-builder-download: true
 
   upload:
     runs-on: ubuntu-latest
