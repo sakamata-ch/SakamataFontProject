@@ -22,23 +22,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: mkaraki/Png2Font
+          ref: bd4075fe45f9c155d6cefd2a7f740f1ce55a216b
+          path: __builder
 
       - name: Build
-        uses: ./.github/actions/build-ttf
+        uses: ./__builder/.github/actions/build-ttf
         with:
+          filename-prefix: sakamata-font
+          fontname: Sakamata Font
           weight: ${{ matrix.weight }}
           strict: ${{ matrix.strict }}
+          skip-builder-download: true
 
   upload:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 
@@ -60,17 +69,19 @@ jobs:
           dotnet run ../fonts/sakamata-font-0-nostrict.sources.tsv
 
       - name: Copy release note
-        run: |
-          cp gen-release-message/message.md fonts/release-note.md
+        run: cp gen-release-message/message.md fonts/release-note.md
 
-      - uses: actions/upload-artifact@v3
+      - name: Put release note to build summary
+        run: cat fonts/release-note.md >> $GITHUB_STEP_SUMMARY
+
+      - uses: actions/upload-artifact@v4
         with:
           name: sakamata-font
           path: fonts
 
       - name: Pre Release
         uses: softprops/action-gh-release@v1
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
         with:
           prerelease: true
           tag_name: v${{ env.DTIME }}
