@@ -1,6 +1,5 @@
 # SakamataFontProject
 [![TTF Builder](https://github.com/mkaraki/SakamataFontProject/actions/workflows/generate-ttf.yml/badge.svg?branch=master)](https://github.com/mkaraki/SakamataFontProject/actions/workflows/generate-ttf.yml)
-[![Webwriter](https://github.com/mkaraki/SakamataFontProject/actions/workflows/generate-webwriter.yml/badge.svg?branch=master)](https://github.com/mkaraki/SakamataFontProject/actions/workflows/generate-webwriter.yml)
 
 これは沙花叉クロヱ氏の手書き文字をフォント化することを目的とする非公式プロジェクトです。
 
