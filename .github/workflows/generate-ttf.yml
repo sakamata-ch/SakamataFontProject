@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build
-        uses: mkaraki/Png2Font/builder-ghaction@5bca2f2aba578796bcd0ddc83f25b6d62ab55432
+        uses: mkaraki/Png2Font/builder-ghaction@ccc749dc129c35f25c6b00bc03ba7802bb97f6f1
         with:
           filename-prefix: sakamata-font
           fontname: Sakamata Font
