@@ -39,6 +39,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '6.0.x'
+
       - name: Download artifacts
         uses: actions/download-artifact@v6
         with:
@@ -82,3 +86,4 @@ jobs:
           files: |
             fonts/*.ttf
             fonts/*.sources.tsv
+
