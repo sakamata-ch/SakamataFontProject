@@ -44,7 +44,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           path: artifacts
 
