@@ -71,7 +71,7 @@ jobs:
       - name: Put release note to build summary
         run: cat fonts/release-note.md >> $GITHUB_STEP_SUMMARY
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: sakamata-font
           path: fonts
