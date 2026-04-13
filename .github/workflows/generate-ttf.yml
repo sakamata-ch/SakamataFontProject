@@ -77,7 +77,7 @@ jobs:
           path: fonts
 
       - name: Pre Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
         with:
           prerelease: true
